@@ -13,18 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package io.dhruvpjoshi.tappyplane.desktop;
+package io.dhruvpjoshi.tappyplane.constants;
 
-import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
-import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
-import io.dhruvpjoshi.tappyplane.TappyPlane;
-import io.dhruvpjoshi.tappyplane.constants.TappyPlaneKeys;
+public class TappyPlaneKeys {
 
-public class DesktopLauncher {
-  public static void main(String[] arg) {
-    LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
-    config.width = TappyPlaneKeys.SCN_WIDTH;
-    config.height = TappyPlaneKeys.SCN_HEIGHT;
-    new LwjglApplication(new TappyPlane(), config);
-  }
+  public static final String IMG_BACKGROUND = "images/background.png";
+
+  public static final int SCN_WIDTH = 800;
+  public static final int SCN_HEIGHT = 480;
 }
