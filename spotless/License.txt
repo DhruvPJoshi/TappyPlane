@@ -1,5 +1,5 @@
 /**
- * Copyright 2019 Dhruv Joshi
+ * Copyright $YEAR Dhruv Joshi
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,15 +13,3 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package io.dhruvpjoshi.tappyplane.desktop;
-
-import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
-import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
-import io.dhruvpjoshi.tappyplane.TappyPlane;
-
-public class DesktopLauncher {
-  public static void main(String[] arg) {
-    LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
-    new LwjglApplication(new TappyPlane(), config);
-  }
-}

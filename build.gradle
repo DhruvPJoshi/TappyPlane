@@ -42,6 +42,7 @@ allprojects {
         java {
             target "**/*.java"
             googleJavaFormat()
+            licenseHeaderFile rootProject.file("spotless/License.txt")
         }
     }
 }
