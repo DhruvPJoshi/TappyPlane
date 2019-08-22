@@ -34,7 +34,10 @@ public class TappyPlane extends ApplicationAdapter {
   public void create() {
     background = new Texture(TappyPlaneKeys.IMG_BACKGROUND);
     batch = new SpriteBatch();
-    camera = new OrthographicCamera();
+    float screenWidth = Gdx.graphics.getWidth();
+    float screenHeight = Gdx.graphics.getHeight();
+    // maintain aspect ratio
+    camera = new OrthographicCamera(30, 30 * (screenWidth / screenHeight));
     camera.setToOrtho(false, TappyPlaneKeys.SCN_WIDTH, TappyPlaneKeys.SCN_HEIGHT);
     fpsLogger = new FPSLogger();
   }
