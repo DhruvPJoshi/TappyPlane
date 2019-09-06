@@ -24,6 +24,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.math.Vector2;
 import io.dhruvpjoshi.tappyplane.constants.TappyPlaneKeys;
 
 public class TappyPlane extends ApplicationAdapter {
@@ -36,6 +37,10 @@ public class TappyPlane extends ApplicationAdapter {
   private TextureRegion terrainBelow;
   private float terrainOffset;
   private float planeAnimTime;
+  private Vector2 planeVelocity;
+  private Vector2 planePosition;
+  private Vector2 planeDefaultPosition;
+  private Vector2 gravity;
 
   @Override
   public void create() {
@@ -62,6 +67,13 @@ public class TappyPlane extends ApplicationAdapter {
             new TextureRegion(new Texture(TappyPlaneKeys.IMG_PLANE_RED_3)),
             new TextureRegion(new Texture(TappyPlaneKeys.IMG_PLANE_RED_2)));
     plane.setPlayMode(Animation.PlayMode.LOOP);
+
+    planeVelocity = new Vector2();
+    planePosition = new Vector2();
+    planeDefaultPosition = new Vector2();
+    gravity = new Vector2();
+
+    resetScene();
   }
 
   @Override
@@ -78,6 +90,8 @@ public class TappyPlane extends ApplicationAdapter {
     float deltaTime = Gdx.graphics.getDeltaTime();
     terrainOffset -= 200 * deltaTime;
     planeAnimTime += deltaTime;
+    planeVelocity.add(gravity);
+    planePosition.mulAdd(planeVelocity, deltaTime);
   }
 
   /** Draws everything on the screen. */
@@ -96,8 +110,17 @@ public class TappyPlane extends ApplicationAdapter {
         terrainAbove,
         terrainOffset + terrainAbove.getRegionWidth(),
         TappyPlaneKeys.SCN_HEIGHT - terrainAbove.getRegionHeight());
-    batch.draw(plane.getKeyFrame(planeAnimTime), 350, 200);
+    batch.draw(plane.getKeyFrame(planeAnimTime), planePosition.x, planePosition.y);
     batch.end();
+  }
+
+  private void resetScene() {
+    terrainOffset = 0;
+    planeAnimTime = 0;
+    planeVelocity.set(0, 0);
+    gravity.set(0, -2);
+    planeDefaultPosition.set(400 - 88 / 2, 240 - 73 / 2);
+    planePosition.set(planeDefaultPosition.x, planeDefaultPosition.y);
   }
 
   @Override
