@@ -41,6 +41,7 @@ public class TappyPlane extends ApplicationAdapter {
   private Vector2 planePosition;
   private Vector2 planeDefaultPosition;
   private Vector2 gravity;
+  private static final Vector2 damping = new Vector2(0.99f, 0.99f);
 
   @Override
   public void create() {
@@ -90,8 +91,17 @@ public class TappyPlane extends ApplicationAdapter {
     float deltaTime = Gdx.graphics.getDeltaTime();
     terrainOffset -= 200 * deltaTime;
     planeAnimTime += deltaTime;
+    planeVelocity.scl(damping);
     planeVelocity.add(gravity);
     planePosition.mulAdd(planeVelocity, deltaTime);
+    planePosition.x = planeDefaultPosition.x;
+    // seamless terrain illusion
+    if (terrainOffset * -1 > terrainBelow.getRegionWidth()) {
+      terrainOffset = 0;
+    }
+    if (terrainOffset > 0) {
+      terrainOffset = -terrainBelow.getRegionWidth();
+    }
   }
 
   /** Draws everything on the screen. */
