@@ -26,6 +26,8 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.utils.viewport.Viewport;
+import com.badlogic.gdx.utils.viewport.FitViewport;
 import io.dhruvpjoshi.tappyplane.constants.TappyPlaneKeys;
 
 public class TappyPlane extends ApplicationAdapter {
@@ -43,6 +45,7 @@ public class TappyPlane extends ApplicationAdapter {
   private Vector2 planePosition;
   private Vector2 planeDefaultPosition;
   private Vector2 gravity;
+  private Viewport viewport;
   private static final Vector2 damping = new Vector2(0.99f, 0.99f);
 
   @Override
@@ -60,7 +63,8 @@ public class TappyPlane extends ApplicationAdapter {
     float screenHeight = Gdx.graphics.getHeight();
     // maintain aspect ratio
     camera = new OrthographicCamera(30, 30 * (screenWidth / screenHeight));
-    camera.setToOrtho(false, TappyPlaneKeys.SCN_WIDTH, TappyPlaneKeys.SCN_HEIGHT);
+    camera.position.set(400, 240, 0);
+    viewport = new FitViewport(TappyPlaneKeys.SCN_WIDTH, TappyPlaneKeys.SCN_HEIGHT, camera);
     fpsLogger = new FPSLogger();
 
     plane =
@@ -82,7 +86,7 @@ public class TappyPlane extends ApplicationAdapter {
 
   @Override
   public void render() {
-    Gdx.gl.glClearColor(1, 0, 0, 1);
+    Gdx.gl.glClearColor(0, 0, 0, 1);
     Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
     fpsLogger.log();
     updateScene();
@@ -134,6 +138,11 @@ public class TappyPlane extends ApplicationAdapter {
     gravity.set(0, -2);
     planeDefaultPosition.set(400 - 88 / 2, 240 - 73 / 2);
     planePosition.set(planeDefaultPosition.x, planeDefaultPosition.y);
+  }
+
+  @Override
+  public void resize(int width, int height) {
+    viewport.update(width, height);
   }
 
   @Override
