@@ -17,13 +17,14 @@ package io.dhruvpjoshi.tappyplane.constants;
 
 public class TappyPlaneKeys {
 
-  public static final String IMG_BACKGROUND = "images/background.png";
-  public static final String IMG_TERR_GRASS = "images/groundGrass.png";
+  public static final String ATLAS = "TappyPlaneAtlas.atlas";
+  public static final String IMG_BACKGROUND = "background";
+  public static final String IMG_TERR_GRASS = "groundGrass";
 
-  public static final String IMG_PLANE_RED = "images/Planes/planeRed";
-  public static final String IMG_PLANE_RED_1 = IMG_PLANE_RED + "1.png";
-  public static final String IMG_PLANE_RED_2 = IMG_PLANE_RED + "2.png";
-  public static final String IMG_PLANE_RED_3 = IMG_PLANE_RED + "3.png";
+  public static final String IMG_PLANE_RED = "planeRed";
+  public static final String IMG_PLANE_RED_1 = IMG_PLANE_RED + "1";
+  public static final String IMG_PLANE_RED_2 = IMG_PLANE_RED + "2";
+  public static final String IMG_PLANE_RED_3 = IMG_PLANE_RED + "3";
 
   public static final int SCN_WIDTH = 800;
   public static final int SCN_HEIGHT = 480;

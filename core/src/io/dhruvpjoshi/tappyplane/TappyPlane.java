@@ -23,6 +23,7 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import io.dhruvpjoshi.tappyplane.constants.TappyPlaneKeys;
@@ -35,6 +36,7 @@ public class TappyPlane extends ApplicationAdapter {
   private Texture background;
   private TextureRegion terrainAbove;
   private TextureRegion terrainBelow;
+  private TextureAtlas atlas;
   private float terrainOffset;
   private float planeAnimTime;
   private Vector2 planeVelocity;
@@ -45,9 +47,10 @@ public class TappyPlane extends ApplicationAdapter {
 
   @Override
   public void create() {
-    background = new Texture(TappyPlaneKeys.IMG_BACKGROUND);
+    atlas = new TextureAtlas(Gdx.files.internal(TappyPlaneKeys.ATLAS));
+    background = atlas.findRegion(TappyPlaneKeys.IMG_BACKGROUND).getTexture();
 
-    terrainBelow = new TextureRegion(new Texture(TappyPlaneKeys.IMG_TERR_GRASS));
+    terrainBelow = atlas.findRegion(TappyPlaneKeys.IMG_TERR_GRASS);
     terrainAbove = new TextureRegion(terrainBelow);
     terrainAbove.flip(true, true);
     terrainOffset = 0.0f;
@@ -63,10 +66,10 @@ public class TappyPlane extends ApplicationAdapter {
     plane =
         new Animation(
             0.05f,
-            new TextureRegion(new Texture(TappyPlaneKeys.IMG_PLANE_RED_1)),
-            new TextureRegion(new Texture(TappyPlaneKeys.IMG_PLANE_RED_2)),
-            new TextureRegion(new Texture(TappyPlaneKeys.IMG_PLANE_RED_3)),
-            new TextureRegion(new Texture(TappyPlaneKeys.IMG_PLANE_RED_2)));
+            atlas.findRegion(TappyPlaneKeys.IMG_PLANE_RED_1),
+            atlas.findRegion(TappyPlaneKeys.IMG_PLANE_RED_2),
+            atlas.findRegion(TappyPlaneKeys.IMG_PLANE_RED_3),
+            atlas.findRegion(TappyPlaneKeys.IMG_PLANE_RED_2));
     plane.setPlayMode(Animation.PlayMode.LOOP);
 
     planeVelocity = new Vector2();
